@@ -51,17 +51,20 @@ public class Main {
                 case "1": {
                     System.out.println("Overworld to Nether conversion");
                     Coordinate overworldCoord = getCoordinates(scanner, "Overworld");
-                    Coordinate netherCoord = overworldToNether(overworldCoord);
-                    System.out.println("Your Overworld X coordinate " + overworldCoord.x + " links to " + netherCoord.x + " in the nether.");
-                    System.out.println("Your Overworld Z coordinate " + overworldCoord.z + " links to " + netherCoord.z + " in the nether.");
+                    Coordinate netherCoord = overworldCoord.toNether();
+                    System.out.println(
+                            "Overworld " + overworldCoord + " links to Nether " + netherCoord
+                    );
                     break;
                 }
                 case "2": {
                     System.out.println("Nether to Overworld conversion");
                     Coordinate netherCoord = getCoordinates(scanner, "Nether");
-                    Coordinate overworldCoord = netherToOverworld(netherCoord);
-                    System.out.println("Your Nether X coordinate " + netherCoord.x + " links to " + overworldCoord.x + " in the overworld.");
-                    System.out.println("Your Nether Z coordinate " + netherCoord.z + " links to " + overworldCoord.z + " in the overworld.");
+                    Coordinate overworldCoord = netherCoord.toOverworld();
+                    System.out.println(
+                            "Nether " + netherCoord + " links to Overworld " + overworldCoord
+                    );
+
                     break;
                 }
                 case "3":
@@ -77,18 +80,6 @@ public class Main {
         double x = readDouble(scanner, label + " X coordinate: ");
         double z = readDouble(scanner, label + " Z coordinate: ");
         return new Coordinate(x, z);
-    }
-
-    static Coordinate netherToOverworld(Coordinate coord) {
-        double overworldX = coord.x * 8;
-        double overworldZ = coord.z * 8;
-        return new Coordinate(overworldX, overworldZ);
-    }
-
-    static Coordinate overworldToNether(Coordinate coord) {
-        double netherX = Math.floor(coord.x / 8);
-        double netherZ = Math.floor(coord.z / 8);
-        return new Coordinate(netherX, netherZ);
     }
 
     static String greetUser(Scanner scanner) {
